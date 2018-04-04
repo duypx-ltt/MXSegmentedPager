@@ -84,8 +84,13 @@
 }
 
 - (void)scrollToTopAnimated:(BOOL)animated {
-    [_contentView setContentOffset:CGPointMake(0, -self.contentView.parallaxHeader.height)
-                          animated:animated];
+    if (@available(iOS 11, *)) {
+        [_contentView setContentOffset:CGPointMake(0, - self.contentView.parallaxHeader.height - self.contentView.parallaxHeader.minimumHeight)
+                              animated:animated];
+    } else {
+        [_contentView setContentOffset:CGPointMake(0, - self.contentView.parallaxHeader.height)
+                              animated:animated];
+    }
 }
 
 #pragma mark Layout
